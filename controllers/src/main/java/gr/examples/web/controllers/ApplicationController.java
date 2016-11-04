@@ -7,7 +7,9 @@ import org.springframework.web.bind.annotation.RestController;
 import gr.examples.core.service.AbstractService;
 import gr.examples.core.service.ApplicationService;
 import gr.examples.domain.Application;
-import gr.examples.transport.ApplicationDto;
+import gr.examples.transformation.service.ApplicationTransformationService;
+import gr.examples.transformation.service.TransformationService;
+import gr.examples.transport.dto.ApplicationDto;
 
 @RestController
 @RequestMapping("/applications")
@@ -16,7 +18,14 @@ public class ApplicationController extends AbstractRestController<Application, A
 	@Autowired
 	ApplicationService applicationService;
 
-	@Override protected AbstractService<Application, ApplicationDto, Long> getService() {
+	@Autowired
+	ApplicationTransformationService applicationTransformationService;
+
+	@Override protected AbstractService<Application, Long> getService() {
 		return applicationService;
+	}
+
+	@Override protected TransformationService<Application, ApplicationDto> getTransformationService() {
+		return applicationTransformationService;
 	}
 }

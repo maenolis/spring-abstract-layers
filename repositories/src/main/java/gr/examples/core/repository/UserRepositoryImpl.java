@@ -11,7 +11,7 @@ import gr.examples.domain.User;
 @Repository
 public class UserRepositoryImpl implements UserRepository {
 
-	List<User> USERS = Arrays.asList(new User[]{new User(0L), new User(1L), new User(2L), new User(3L)});
+	List<User> USERS = Arrays.asList(new User[]{new User(0L, "email0"), new User(1L, "email1"), new User(2L, "email2"), new User(3L, "email3")});
 
 	@Override public List<User> get() {
 		return USERS;
@@ -23,14 +23,21 @@ public class UserRepositoryImpl implements UserRepository {
 	}
 
 	@Override public User create(final User entity) {
-		return null;
+		USERS.add(entity);
+		return entity;
 	}
 
-	@Override public User update(final User entity) {
-		return null;
+	@Override public User update(final User entity) throws Exception {
+		if (!USERS.remove(entity)) {
+			throw new Exception(String.format("User with id [%d] not found", entity.getId()));
+		}
+		USERS.add(entity);
+		return entity;
 	}
 
-	@Override public void delete(final User entity) {
-
+	@Override public void delete(final User entity) throws Exception {
+		if (!USERS.remove(entity)) {
+			throw new Exception(String.format("User with id [%d] not found", entity.getId()));
+		}
 	}
 }

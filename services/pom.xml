@@ -15,12 +15,6 @@
 	<dependencies>
 		<dependency>
 			<groupId>gr.ex</groupId>
-			<artifactId>transport</artifactId>
-			<version>1.0-SNAPSHOT</version>
-		</dependency>
-
-		<dependency>
-			<groupId>gr.ex</groupId>
 			<artifactId>domain</artifactId>
 			<version>1.0-SNAPSHOT</version>
 		</dependency>

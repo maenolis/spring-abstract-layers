@@ -3,21 +3,18 @@ package gr.examples.core.service;
 import java.util.List;
 
 import gr.examples.core.repository.AbstractRepository;
-import gr.examples.core.service.transform.TransformationService;
 
-public interface AbstractService<T, D, I> {
+public interface AbstractService<T, I> {
 
-	List<D> get();
+	List<T> get() throws Exception;
 
-	D get(I id);
+	T get(I id) throws InstantiationException;
 
-	D create(D entity);
+	T create(T entity);
 
-	D update(D entity);
+	T update(T entity) throws Exception;
 
-	void delete(D entity);
+	void delete(T entity) throws Exception;
 
 	AbstractRepository<T, I> getRepository();
-
-	TransformationService<T, D> getTransformationService();
 }

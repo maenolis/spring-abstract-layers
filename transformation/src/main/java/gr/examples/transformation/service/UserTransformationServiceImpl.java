@@ -1,4 +1,4 @@
-package gr.examples.core.service.transform;
+package gr.examples.transformation.service;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 
 import gr.examples.domain.User;
-import gr.examples.transport.UserDto;
+import gr.examples.transport.dto.UserDto;
 
 @Service
 public class UserTransformationServiceImpl implements UserTransformationService {
@@ -19,7 +19,7 @@ public class UserTransformationServiceImpl implements UserTransformationService 
 	}
 
 	@Override public UserDto transformToDto(final User entity) {
-		return new UserDto(entity.getId());
+		return new UserDto(entity.getId(), entity.getEmail());
 	}
 
 	@Override public List<UserDto> transformToDto(final List<User> entities) {

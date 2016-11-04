@@ -1,4 +1,4 @@
-package gr.examples.core.service.transform;
+package gr.examples.transformation.service;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 
 import gr.examples.domain.Application;
-import gr.examples.transport.ApplicationDto;
+import gr.examples.transport.dto.ApplicationDto;
 
 @Service
 public class ApplicationTransformationServiceImpl implements ApplicationTransformationService {

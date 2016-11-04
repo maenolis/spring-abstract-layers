@@ -23,14 +23,21 @@ public class ApplicationRepositoryImpl implements ApplicationRepository {
 	}
 
 	@Override public Application create(final Application entity) {
-		return null;
+		APPS.add(entity);
+		return entity;
 	}
 
-	@Override public Application update(final Application entity) {
-		return null;
+	@Override public Application update(final Application entity) throws Exception {
+		if (!APPS.remove(entity)) {
+			throw new Exception(String.format("Application with id [%d] not found", entity.getId()));
+		}
+		APPS.add(entity);
+		return entity;
 	}
 
-	@Override public void delete(final Application entity) {
-
+	@Override public void delete(final Application entity) throws Exception {
+		if (!APPS.remove(entity)) {
+			throw new Exception(String.format("Application with id [%d] not found", entity.getId()));
+		}
 	}
 }

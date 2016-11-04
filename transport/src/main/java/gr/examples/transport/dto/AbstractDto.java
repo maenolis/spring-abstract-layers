@@ -1,25 +1,23 @@
-package gr.examples.transport;
+package gr.examples.transport.dto;
 
-public class UserDto {
+public class AbstractDto<T> {
 
-	private Long id;
+	protected T id;
 
-	private String type;
+	private String type = "dto";
 
-	public UserDto() {
-		type = "dto";
-	}
-
-	public UserDto(Long id) {
+	public AbstractDto(final T id) {
 		this.id = id;
-		type = "dto";
 	}
 
-	public Long getId() {
+	public AbstractDto() {
+	}
+
+	public T getId() {
 		return id;
 	}
 
-	public void setId(final Long id) {
+	public void setId(final T id) {
 		this.id = id;
 	}
 
@@ -32,7 +30,7 @@ public class UserDto {
 	}
 
 	@Override public String toString() {
-		final StringBuilder sb = new StringBuilder("UserDto{");
+		final StringBuilder sb = new StringBuilder("AbstractDto{");
 		sb.append("id=").append(id);
 		sb.append(", type='").append(type).append('\'');
 		sb.append('}');

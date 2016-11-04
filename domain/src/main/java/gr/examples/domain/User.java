@@ -1,29 +1,43 @@
 package gr.examples.domain;
 
-public class User {
+public class User extends BaseUser<Long> {
 
-	private Long id;
+	private String email;
 
 	public User() {
 
 	}
 
 	public User(Long id) {
-		this.id = id;
+		super(id);
 	}
 
-	public Long getId() {
-		return id;
+	public User(final Long id, final String email) {
+		super(id);
+		this.email = email;
 	}
 
-	public void setId(final Long id) {
-		this.id = id;
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(final String email) {
+		this.email = email;
 	}
 
 	@Override public String toString() {
 		final StringBuilder sb = new StringBuilder("User{");
-		sb.append("id=").append(id);
+		sb.append(", email='").append(email).append('\'');
 		sb.append('}');
 		return sb.toString();
+	}
+
+	@Override public boolean equals(final Object obj) {
+		if (obj == null || !(obj instanceof User)) {
+			return false;
+		}
+		User other = (User) obj;
+
+		return other.getId().equals(this.id);
 	}
 }

@@ -7,7 +7,9 @@ import org.springframework.web.bind.annotation.RestController;
 import gr.examples.core.service.AbstractService;
 import gr.examples.core.service.UserService;
 import gr.examples.domain.User;
-import gr.examples.transport.UserDto;
+import gr.examples.transformation.service.TransformationService;
+import gr.examples.transformation.service.UserTransformationService;
+import gr.examples.transport.dto.UserDto;
 
 @RestController
 @RequestMapping("/users")
@@ -16,7 +18,14 @@ public class UserController extends AbstractRestController<User, UserDto, Long> 
 	@Autowired
 	UserService userService;
 
-	@Override protected AbstractService<User, UserDto, Long> getService() {
+	@Autowired
+	UserTransformationService userTransformationService;
+
+	@Override protected AbstractService<User, Long> getService() {
 		return userService;
+	}
+
+	@Override protected TransformationService<User, UserDto> getTransformationService() {
+		return userTransformationService;
 	}
 }

@@ -3,31 +3,33 @@ package gr.examples.core.service;
 import java.util.List;
 
 import gr.examples.core.repository.AbstractRepository;
-import gr.examples.core.service.transform.TransformationService;
 
-public abstract class AbstractServiceImpl<T, D, I> implements AbstractService<T, D, I> {
+public abstract class AbstractServiceImpl<T, I> implements AbstractService<T, I> {
 
-	@Override public List<D> get() {
-		return getTransformationService().transformToDto(getRepository().get());
+	@Override public List<T> get() throws Exception {
+		return getRepository().get();
 	}
 
-	@Override public D get(final I id) {
-		return getTransformationService().transformToDto(getRepository().get(id));
+	@Override
+	public T get(final I id) throws InstantiationException {
+		T entity = getRepository().get(id);
+		if (entity == null) {
+			throw new InstantiationException(String.format("Entity with id [%s] was not found.", id.toString()));
+		}
+		return entity;
 	}
 
-	@Override public D create(final D entity) {
-		return getTransformationService().transformToDto(getRepository().create(null));
+	@Override public T create(final T entity) {
+		return getRepository().create(entity);
 	}
 
-	@Override public D update(final D entity) {
-		return getTransformationService().transformToDto(getRepository().update(null));
+	@Override public T update(final T entity) throws Exception {
+		return getRepository().update(entity);
 	}
 
-	@Override public void delete(final D entity) {
-		getRepository().delete(null);
+	@Override public void delete(final T entity) throws Exception {
+		getRepository().delete(entity);
 	}
 
 	@Override public abstract AbstractRepository<T, I> getRepository();
-
-	@Override public abstract TransformationService<T, D> getTransformationService();
 }
