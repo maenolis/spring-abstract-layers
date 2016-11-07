@@ -12,34 +12,6 @@ public class UserRepositoryImpl extends AbstractRepositoryImpl<User, Long> imple
 
 	List<User> USERS = Arrays.asList(new User[]{new User(0L, "email0"), new User(1L, "email1"), new User(2L, "email2"), new User(3L, "email3")});
 
-//	@Override public List<User> get() {
-//		return USERS;
-//	}
-//
-//	@Override public User get(final Long id) {
-//		Stream<User> userStream = USERS.stream().filter(user -> id.equals(user.getId()));
-//		return userStream.findFirst().get();
-//	}
-//
-//	@Override public User create(final User entity) {
-//		USERS.add(entity);
-//		return entity;
-//	}
-//
-//	@Override public User update(final User entity) throws Exception {
-//		if (!USERS.remove(entity)) {
-//			throw new Exception(String.format("User with id [%d] not found", entity.getId()));
-//		}
-//		USERS.add(entity);
-//		return entity;
-//	}
-//
-//	@Override public void delete(final User entity) throws Exception {
-//		if (!USERS.remove(entity)) {
-//			throw new Exception(String.format("User with id [%d] not found", entity.getId()));
-//		}
-//	}
-
 	@Override protected List<User> getObjects() {
 		return USERS;
 	}
