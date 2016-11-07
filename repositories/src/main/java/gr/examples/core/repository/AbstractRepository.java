@@ -2,7 +2,9 @@ package gr.examples.core.repository;
 
 import java.util.List;
 
-public interface AbstractRepository<T, I> {
+import gr.examples.domain.AbstractEntity;
+
+public interface AbstractRepository<T extends AbstractEntity<I>, I> {
 	List<T> get();
 
 	T get(I id);

@@ -21,12 +21,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import gr.examples.core.service.AbstractService;
+import gr.examples.domain.AbstractEntity;
 import gr.examples.transformation.service.TransformationService;
 import gr.examples.transport.dto.AbstractDto;
 
 @RestController
 @RequestMapping("/rest")
-public abstract class AbstractRestController<T, D extends AbstractDto<I>, I> {
+public abstract class AbstractRestController<T extends AbstractEntity<I>, D extends AbstractDto<I>, I> {
 
 	@GetMapping
 	public ResponseEntity<List<D>> get() throws Exception {
@@ -35,7 +36,7 @@ public abstract class AbstractRestController<T, D extends AbstractDto<I>, I> {
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<D> getById(@PathVariable I id) {
+	public ResponseEntity<D> getById(@PathVariable I id) throws InstantiationException {
 		T entity = getService().get(id);
 		return new ResponseEntity<>(getTransformationService().transformToDto(entity), HttpStatus.OK);
 	}
@@ -48,14 +49,14 @@ public abstract class AbstractRestController<T, D extends AbstractDto<I>, I> {
 	}
 
 	@PutMapping
-	public ResponseEntity<D> update(@RequestBody @Valid D entity) {
+	public ResponseEntity<D> update(@RequestBody @Valid D entity) throws Exception {
 		T transformedEnity = getTransformationService().transformToEntity(entity);
 		T updatedEntity = getService().update(transformedEnity);
 		return new ResponseEntity<>(getTransformationService().transformToDto(updatedEntity), HttpStatus.OK);
 	}
 
 	@DeleteMapping
-	public ResponseEntity<Void> delete(@RequestBody @Valid D entity) {
+	public ResponseEntity<Void> delete(@RequestBody @Valid D entity) throws Exception {
 		T transformedEnity = getTransformationService().transformToEntity(entity);
 		getService().delete(transformedEnity);
 		return new ResponseEntity<>(HttpStatus.OK);

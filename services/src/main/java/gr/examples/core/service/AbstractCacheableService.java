@@ -1,5 +1,7 @@
 package gr.examples.core.service;
 
-public interface AbstractCacheableService<T, I> extends AbstractService<T, I> {
+import gr.examples.domain.AbstractEntity;
+
+public interface AbstractCacheableService<T extends AbstractEntity<I>, I> extends AbstractService<T, I> {
 	String getCacheName();
 }

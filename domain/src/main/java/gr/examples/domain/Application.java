@@ -1,8 +1,6 @@
 package gr.examples.domain;
 
-public class Application {
-
-	private Long id;
+public class Application extends AbstractEntity<Long> {
 
 	private String name;
 
@@ -20,15 +18,6 @@ public class Application {
 
 	public void setName(final String name) {
 		this.name = name;
-	}
-
-	public Long getId() {
-
-		return id;
-	}
-
-	public void setId(final Long id) {
-		this.id = id;
 	}
 
 	@Override public String toString() {

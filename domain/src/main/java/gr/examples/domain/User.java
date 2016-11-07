@@ -4,6 +4,11 @@ public class User extends BaseUser<Long> {
 
 	private String email;
 
+	public User(final Long id, final String firstName, final String lastName, final String email) {
+		super(id, firstName, lastName);
+		this.email = email;
+	}
+
 	public User() {
 
 	}

@@ -1,11 +1,15 @@
 package gr.examples.domain;
 
-import javax.validation.constraints.Min;
+public abstract class BaseUser<T> extends AbstractEntity<T> {
 
-public abstract class BaseUser<T> {
+	private String firstName;
+	private String lastName;
 
-	@Min(value = 0, message = "No negative ids allowed.")
-	protected T id;
+	public BaseUser(final T id, final String firstName, final String lastName) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.id = id;
+	}
 
 	public BaseUser(final T id) {
 		this.id = id;
@@ -14,12 +18,20 @@ public abstract class BaseUser<T> {
 	public BaseUser() {
 	}
 
-	public T getId() {
-		return id;
+	public String getFirstName() {
+		return firstName;
 	}
 
-	public void setId(final T id) {
-		this.id = id;
+	public void setFirstName(final String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(final String lastName) {
+		this.lastName = lastName;
 	}
 
 	@Override public String toString() {

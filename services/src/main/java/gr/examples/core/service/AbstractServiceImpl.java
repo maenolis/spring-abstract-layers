@@ -3,8 +3,9 @@ package gr.examples.core.service;
 import java.util.List;
 
 import gr.examples.core.repository.AbstractRepository;
+import gr.examples.domain.AbstractEntity;
 
-public abstract class AbstractServiceImpl<T, I> implements AbstractService<T, I> {
+public abstract class AbstractServiceImpl<T extends AbstractEntity<I>, I> implements AbstractService<T, I> {
 
 	@Override public List<T> get() throws Exception {
 		return getRepository().get();
